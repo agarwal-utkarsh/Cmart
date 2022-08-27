@@ -5,6 +5,7 @@ const ProductState = (props) => {
     const [productName, setProductName] = useState('');
     const [category, setCategory] = useState('');
     const [productPrice, setProductPrice] = useState(0);
+    const [image,setImage]=useState('');
     const [productDetails, setProductDetails] = useState([])
 
     const nameHandler = (value) => {
@@ -19,12 +20,17 @@ const ProductState = (props) => {
         setProductPrice(value)
     }
 
+    const imageHandler=(value)=>{
+        setImage(value);
+    }
+
     const detailsHandler=()=>{
         const data={
             id:Math.random().toString(),
             productName:productName,
             productPrice:productPrice,
-            category:category
+            category:category,
+            image:image
         }
         setProductDetails((prevState => {
             return [
@@ -34,6 +40,7 @@ const ProductState = (props) => {
         setProductName('');
         setCategory('');
         setProductPrice(0);
+        setImage('');
 
 
     }
@@ -43,11 +50,13 @@ const ProductState = (props) => {
             productName: productName,
             category: category,
             productPrice: productPrice,
+            image:image,
             productDetails: productDetails,
             nameHandler: nameHandler,
             categoryHandler: categoryHandler,
             priceHandler: priceHandler,
-            detailsHandler:detailsHandler
+            imageHandler:imageHandler,
+            detailsHandler:detailsHandler,
         }} >
             {props.children}
         </ProductContext.Provider>

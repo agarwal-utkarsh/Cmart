@@ -19,6 +19,11 @@ const Product = () => {
     productContext.categoryHandler(e.target.value);
   }
 
+  const imageChangeHandler=(e)=>{
+    productContext.imageHandler(e.target.value);
+    
+  }
+
   const submitHandler = (e) => {
     e.preventDefault();
     if(productContext.productPrice<=0){
@@ -28,6 +33,7 @@ const Product = () => {
     console.log(productContext.productName)
     console.log(productContext.productPrice)
     console.log(productContext.category)
+    console.log(productContext.image);
     productContext.detailsHandler();
   }
 
@@ -64,6 +70,7 @@ const Product = () => {
               <MenuItem value="grocery" >Grocery</MenuItem>
 
             </TextField>
+            <TextField variant='outlined' sx={{ marginBottom: "8px", width: "50%" }} type="url" onChange={imageChangeHandler} label="Image Link" value={productContext.image}></TextField>
           </div>
 
 
