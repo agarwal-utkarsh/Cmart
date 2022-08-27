@@ -9,6 +9,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 import UserCart from './UserCart';
+
 import { useState } from 'react'
 
 
@@ -29,29 +30,45 @@ const Users = () => {
 
     // Adding the products in the Cart State
     const addCart = (curElem) => {
-        setCart([...cartp , curElem]);
+        const newData = {
+            id: new Date().getTime().toString(),
+            name: curElem.name,
+            price: curElem.price,
+            image: curElem.image,
+            quantity: curElem.quantity,
+        };
+        setCart([...cartp , newData]);
     };
 
     const items = [
         {
+            id: 1,
             name: "LG Ultra Gear",
-            price: "Rs. 20,200 /-",
+            price: "20200",
             category: "Electronics",
             image: "https://www.lg.com/in/images/monitors/md07549018/gallery/24GN600-B-D-1.jpg",
+            quantity: 30,
+            buy_quantity: 0,
         },
 
         {
+            id: 2,
             name: "OnePlus 10 Pro",
-            price: "Rs. 49,000 /-",
+            price: "49000",
             category: "Smart Phones",
             image: "https://www.91-cdn.com/hub/wp-content/uploads/2021/11/OnePlus-10-Pro.jpg",
+            quantity: 20,
+            buy_quantity: 0,
         },
 
         {
+            id: 3,
             name: "Ferrero Rocher",
-            price: "Rs. 1000 /-",
+            price: "1000",
             category: "Chocolates",
             image: "https://m.media-amazon.com/images/I/71uNpGYLbnL._SL1100_.jpg",
+            quantity: 100,
+            buy_quantity: 0,
         },
     ];
 
@@ -62,7 +79,7 @@ const Users = () => {
         <h1>User Page</h1>
 
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={1}>
+      <Grid container spacing={1} alignItems="center" justifyContent="center">
         {items.map( (item) => (
         <Grid>
             <Card sx={{ maxWidth: 345 }}>
@@ -79,11 +96,10 @@ const Users = () => {
                     </Typography>
 
                     <Typography gutterBottom variant="h5" component="div">
-                        {item.price}
+                        Rs. {item.price} /-
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                        species, ranging across all continents except Antarctica
+                    Numer of Items Available: {item.quantity}
                     </Typography>
                     </CardContent>
                 </CardActionArea>
