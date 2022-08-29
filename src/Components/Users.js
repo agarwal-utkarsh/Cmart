@@ -60,7 +60,7 @@ const Users = () => {
        
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={1}>
-        {items.map( (item) => (
+        {productContext.productDetails.map( (item) => (
         <Grid>
             <Card sx={{ maxWidth: 345 }}>
                 <CardActionArea>

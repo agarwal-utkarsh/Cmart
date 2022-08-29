@@ -1,11 +1,12 @@
 import { Box, Button, MenuItem, TextField, Typography } from '@mui/material';
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import ProductContext from '../context/product-context';
+import AdminNavbar from './AdminNavbar';
 
 
 const Product = () => {
   const productContext = useContext(ProductContext);
-
+  
   const nameChangeHandler = (e) => {
     productContext.nameHandler(e.target.value)
   }
@@ -40,6 +41,7 @@ const Product = () => {
   return (
     <div style={{ textAlign: "center" ,justifyContent:"center",
     alignItems:"center",}}>
+      <AdminNavbar />
       <Box sx={{
         width: 600,
         height: 400,
