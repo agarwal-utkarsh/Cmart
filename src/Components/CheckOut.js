@@ -15,6 +15,7 @@ import {useState} from 'react'
 
 
 const CheckOut = (props) => {
+  console.log(props.co)
   const [ total , setTotal ] = useState(0)
     
 
@@ -24,7 +25,7 @@ const CheckOut = (props) => {
         <h1>CheckOut Page</h1>
 
         <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={1}>
+      <Grid container spacing={1} alignItems="center" justifyContent="center" >
         {props.co.map( (item) => (
         <Grid>
             <Card sx={{ maxWidth: 345 }}>

@@ -1,16 +1,9 @@
 import * as React from 'react';
+import {Box,Paper,Grid,Card,CardContent,CardMedia,Typography,Button, CardActionArea, CardActions } from '@mui/material'
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
 import UserCart from './UserCart';
-
 import { useState } from 'react'
+import ProductContext from '../context/product-context';
 
 
 
@@ -25,19 +18,29 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Users = () => {
 
-
+    const productContext=React.useContext(ProductContext);
+    console.log(productContext.productDetails);
     const [ cartp , setCart ] = useState([])
+    
+    // const initialUnit = 0; 
+    // const [ units , setUnits] = useState(initialUnit)
 
     // Adding the products in the Cart State
     const addCart = (curElem) => {
+
+        
         const newData = {
-            id: new Date().getTime().toString(),
-            name: curElem.name,
-            price: curElem.price,
+            id: curElem.id,
+            name: curElem.productName,
+            price: curElem.productPrice,
             image: curElem.image,
             quantity: curElem.quantity,
+            count: curElem.buy_quantity,
         };
         setCart([...cartp , newData]);
+
+
+        
     };
 
     const items = [
@@ -71,32 +74,33 @@ const Users = () => {
             buy_quantity: 0,
         },
     ];
+    
 
 
   return (
     <>
     
         <h1>User Page</h1>
-
+       
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={1} alignItems="center" justifyContent="center">
-        {items.map( (item) => (
+      <Grid container spacing={1} alignItems="center" justifyContent="center" display={'-ms-inline-flexbox'}  >
+        {productContext.productDetails.map( (item) => (
         <Grid>
-            <Card sx={{ maxWidth: 345 }}>
+            <Card sx={{ maxWidth: 345 , maxHeight: '500px' , marginLeft: '12px' , padding: '7px' , marginTop: '11px' ,marginBottom: '11px'}}  >
                 <CardActionArea>
                     <CardMedia
                     component="img"
-                    height="320"
+                    height="250"
                     image={item.image}
                     alt="POC"
                     />
                     <CardContent>
                     <Typography gutterBottom variant="h4" component="div">
-                        {item.name}
+                        {item.productName}
                     </Typography>
 
                     <Typography gutterBottom variant="h5" component="div">
-                        Rs. {item.price} /-
+                        Rs. {item.productPrice} /-
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                     Numer of Items Available: {item.quantity}
