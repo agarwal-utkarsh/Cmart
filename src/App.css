@@ -4,7 +4,7 @@
 }
 .App {
 
-  background-image: linear-gradient(to right,rgb(255, 255, 255),rgb(151, 151, 151));
+  /* background-image: linear-gradient(to right,rgb(255, 255, 255),rgb(151, 151, 151)); */
   height: 100vh;
 }
 

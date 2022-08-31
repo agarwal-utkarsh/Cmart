@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import AdminNavbar from './AdminNavbar';
+import { Navigate } from 'react-router-dom';
 
 const AdminLogin = () => {
     const [adminName, setAdminName] = useState('');
@@ -26,10 +27,16 @@ const AdminLogin = () => {
         axios.post(url, adminData).then(res => {
             
             setToken(res.data.token);
+            // setIsLogin(true);
+            localStorage.setItem("token",res.data.token);
+            localStorage.setItem("isLogin",true);
+
             if (res.data.token) {
                 console.log("Token generated");
             }
         })
+        setPassword('');
+        <Navigate to="/admin-login" replace={true} />
 
     }
 
@@ -39,7 +46,7 @@ const AdminLogin = () => {
             alignItems: "center",
         }}>
             {
-                !token ? <Box sx={{
+                !(localStorage.getItem("token")) ? <Box sx={{
                     width: 600,
                     height: 400,
                     // backgroundColor: '#ccc',

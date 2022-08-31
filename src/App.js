@@ -20,7 +20,9 @@ function App() {
       
         <Routes>
           <Route exact path="/admin-login" element={<AdminLogin />} />
+          <Route exact path="/admin-logout" element={<AdminLogin />} />
           <Route exact path="/user-login" element={<UserLogin />} />
+          <Route exact path="/user-logout" element={<UserLogin />} />
           <Route exact path="/add-products" element={<Product />} />
           <Route exact path="/products" element={<Users />} />
           <Route exact path="/admin-products" element={<AdminShowProducts />} />

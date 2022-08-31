@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import axios from 'axios';
+import React, {  useEffect, useState } from 'react'
 import ProductContext from './product-context';
 
 const ProductState = (props) => {
@@ -6,8 +7,16 @@ const ProductState = (props) => {
     const [category, setCategory] = useState('');
     const [productPrice, setProductPrice] = useState(0);
     const [image, setImage] = useState('');
-    const [productDetails, setProductDetails] = useState([])
+    const [productDetails, setProductDetails] = useState([]);   
+      
+    useEffect(()=>{
+        const url="https://fakestoreapi.com/products";
+        axios.get(url).then((res)=>{
+            
+            setProductDetails(res.data);
+        })
 
+    },[])
     const nameHandler = (value) => {
         setProductName(value);
     }
@@ -46,9 +55,10 @@ const ProductState = (props) => {
 
     const detailsHandler = () => {
         const data = {
+            //property names can be set according to the api
             id: Math.random().toString(),
-            productName: productName,
-            productPrice: productPrice,
+            title: productName,
+            price: productPrice,
             category: category,
             image: image
         }
@@ -57,16 +67,16 @@ const ProductState = (props) => {
                 ...prevState, data
             ]
         }))
+        const url="https://fakestoreapi.com/products";
+        axios.post(url,data).then(res=>{
+            console.log(res);
+        })
         setProductName('');
         setCategory('');
         setProductPrice(0);
         setImage('');
 
 
-    }
-
-    const editDetailsHandler = () => {
-        console.log("edit in context");
     }
 
     return (

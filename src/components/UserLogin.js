@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import Navbar from './Navbar';
+import { Navigate } from 'react-router-dom';
 
 const UserLogin = () => {
     const [userName, setUserName] = useState('');
@@ -21,14 +22,13 @@ const UserLogin = () => {
             password: password,
         }
         const data = JSON.stringify(userData)
-        console.log(data);
         const url = 'https://reqres.in/api/login';
         axios.post(url, userData).then(res => {
             console.log(res.data.token);
             setToken(res.data.token);
-            if (res.data.token) {
-                console.log("Token generated");
-            }
+            localStorage.setItem("token", res.data.token);
+            setPassword('');
+            <Navigate to="/user-login" replace={true} />
         })
 
     }
@@ -39,7 +39,7 @@ const UserLogin = () => {
             alignItems: "center",
         }}>
             {
-                !token ? <Box sx={{
+                !(localStorage.getItem("token")) ? <Box sx={{
                     width: 600,
                     height: 400,
                     // backgroundColor: '#ccc',

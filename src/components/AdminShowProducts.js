@@ -10,9 +10,9 @@ import EditProduct from './EditProducts';
 const AdminShowProducts = () => {
 
   const productContext = React.useContext(ProductContext);
-  
+
   const [open, setOpen] = React.useState(false);
-  const [editItem,setEditItem]=React.useState('');
+  const [editItem, setEditItem] = React.useState('');
   const showModal = (item) => {
     setEditItem(item);
     setOpen(true);
@@ -24,10 +24,10 @@ const AdminShowProducts = () => {
     productContext.deleteHandler(item.id);
   }
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     hideModal();
 
-  },[productContext.productDetails])
+  }, [productContext.productDetails])
 
   const style = {
     position: 'absolute',
@@ -44,31 +44,25 @@ const AdminShowProducts = () => {
     <>
 
       <AdminNavbar />
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={1}>
-          {productContext.productDetails.map((item)=>{
-            
-          })}
+      <Typography variant="h3">Products Listed</Typography>
+      <Box sx={{ marginTop: 5 }}>
+        <Grid container spacing={1} >
           {productContext.productDetails.map((item) => (
-            <Grid>
-              <Card sx={{ maxWidth: 345 }}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="300"
-                    image={item.image}
-                    alt="POC"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="h4" component="div">
-                      {item.productName}
-                    </Typography>
+            <Grid >
+              <Card sx={{ width: 400, margin: 2.4,backgroundColor:"transparent" }}>
+                <div>
+                  <img src={item.image} style={{ height: "300px", widht: "300px" }}></img>
+                </div>
+                <CardContent>
+                  <Typography variant="h4" >
+                    {item.title}
+                  </Typography>
+                  {/* item.{property name } can be changed according to the api  */}
+                  <Typography variant="h5" >
+                    {item.price} /-
+                  </Typography>
+                </CardContent>
 
-                    <Typography gutterBottom variant="h5" component="div">
-                      {item.productPrice} /-
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
                 <CardActions>
                   <Button size="small" color="primary" varinat="outlined" onClick={() => deleteProducts(item)}>
                     Delete
@@ -84,10 +78,10 @@ const AdminShowProducts = () => {
       </Box>
 
       <Modal
-          open={open}
-          onClose={hideModal}
+        open={open}
+        onClose={hideModal}
       >
-      <Box sx={style}>
+        <Box sx={style}>
           <EditProduct item={editItem} />
           <Button variant='outlined' onClick={hideModal} >Close</Button>
         </Box>

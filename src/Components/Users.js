@@ -3,6 +3,7 @@ import {Box,Paper,Grid,Card,CardContent,CardMedia,Typography,Button, CardActionA
 import { styled } from '@mui/material/styles';
 import UserCart from './UserCart';
 import { useState } from 'react'
+import Navbar from './Navbar';
 import ProductContext from '../context/product-context';
 
 
@@ -55,7 +56,7 @@ const Users = () => {
 
   return (
     <>
-    
+    <Navbar />
         <h1>User Page</h1>
        
     <Box sx={{ flexGrow: 1 }}>

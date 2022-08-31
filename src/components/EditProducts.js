@@ -8,8 +8,10 @@ const EditProduct = (props) => {
     const productContext = useContext(ProductContext);
     // console.log(props.item.id);
     const id = props.item.id;
-    const [editProductName, setEditProductName] = useState(props.item.productName);
-    const [editProductPrice, setEditProductPrice] = useState(props.item.productPrice);
+    //props. itemProperty can be changed according to the api and database
+    // const [editProductName, setEditProductName] = useState(props.item.productName);
+    const [editProductName, setEditProductName] = useState(props.item.title);
+    const [editProductPrice, setEditProductPrice] = useState(props.item.price);
     const [editProductCategory, setEditProductCategory] = useState(props.item.category);
     const [editProductImage, setEditProductImage] = useState(props.item.image);
 
@@ -42,10 +44,11 @@ const EditProduct = (props) => {
             alert("Price should be greater than 0");
             return;
         }
+        {/* item.name according to the data base api */}
         const updatedProduct={
             id:id,
-            productName:editProductName,
-            productPrice:editProductPrice,
+            title:editProductName,
+            price:editProductPrice,
             category:editProductCategory,
             image:editProductImage,
         }
