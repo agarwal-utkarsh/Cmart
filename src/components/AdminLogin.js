@@ -8,6 +8,7 @@ const AdminLogin = () => {
     const [adminName, setAdminName] = useState('');
     const [password, setPassword] = useState('');
     const [token, setToken] = useState('')
+    const [loading,setLoading]=useState(false);
     const adminNameChangeHandler = (e) => {
         setAdminName(e.target.value);
     }
@@ -17,6 +18,7 @@ const AdminLogin = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        setLoading(true)
         const adminData = {
             email: adminName, // username or eamil as per requirement by the api
             password: password,
@@ -30,13 +32,16 @@ const AdminLogin = () => {
             // setIsLogin(true);
             localStorage.setItem("token",res.data.token);
             localStorage.setItem("isLogin",true);
+            setLoading(false);
 
             if (res.data.token) {
                 console.log("Token generated");
             }
         })
+            
+       
         setPassword('');
-        <Navigate to="/admin-login" replace={true} />
+        
 
     }
 
@@ -68,7 +73,8 @@ const AdminLogin = () => {
                             <TextField required sx={{ marginBottom: "8px", width: "50%" }} variant="outlined" onChange={adminNameChangeHandler} label="User Name" value={adminName} />
 
                             <TextField required sx={{ marginBottom: "8px", width: "50%" }} variant="outlined" onChange={passwordChangeHandler} type="password" label="Password" value={password} />
-
+                            {loading && <Typography variant="h5">Logging you in...</Typography>}
+                            
                         </div>
 
 

@@ -9,6 +9,7 @@ import AdminLogin from './components/AdminLogin';
 import UserLogin from './components/UserLogin';
 import AdminShowProducts from './components/AdminShowProducts';
 import { Button } from '@mui/material';
+import Home from './components/Home';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         {/* <Navbar /> */}
       
         <Routes>
+          <Route exact path="/" element={<Home />} />
           <Route exact path="/admin-login" element={<AdminLogin />} />
           <Route exact path="/admin-logout" element={<AdminLogin />} />
           <Route exact path="/user-login" element={<UserLogin />} />

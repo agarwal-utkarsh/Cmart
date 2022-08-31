@@ -8,6 +8,7 @@ const UserLogin = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [token, setToken] = useState('')
+    const [loading,setLoading]=useState(false)
     const userNameChangeHandler = (e) => {
         setUserName(e.target.value);
     }
@@ -17,18 +18,20 @@ const UserLogin = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        setLoading(true);
         const userData = {
             email: userName, // username or eamil as per requirement by the api
             password: password,
         }
-        const data = JSON.stringify(userData)
+        
         const url = 'https://reqres.in/api/login';
         axios.post(url, userData).then(res => {
             console.log(res.data.token);
             setToken(res.data.token);
             localStorage.setItem("token", res.data.token);
+            setLoading(false);
             setPassword('');
-            <Navigate to="/user-login" replace={true} />
+            
         })
 
     }
@@ -61,7 +64,7 @@ const UserLogin = () => {
                             <TextField required sx={{ marginBottom: "8px", width: "50%" }} variant="outlined" onChange={userNameChangeHandler} label="User Name" value={userName} />
 
                             <TextField required sx={{ marginBottom: "8px", width: "50%" }} variant="outlined" onChange={passwordChangeHandler} type="password" label="Password" value={password} />
-
+                            {loading && <Typography variant="h5">Logging you in...</Typography>}
                         </div>
 
 
