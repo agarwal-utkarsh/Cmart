@@ -1,5 +1,6 @@
 import React from 'react'
 import Users from './components/Users'
+import UserCart from './components/UserCart'
 import './App.css';
 import Product from './components/Product';
 import ProductState from './context/ProductState';
@@ -11,9 +12,20 @@ import AdminShowProducts from './components/AdminShowProducts';
 import { Button } from '@mui/material';
 import Home from './components/Home';
 import Supplier from './components/Supplier';
+import { useState } from 'react'
+import EachCartItem from './components/EachCartItem';
+import CheckOut from './components/CheckOut';
+
 
 
 function App() {
+
+const [recCart , setCart] = useState([]);
+
+const [ checko , setCheck ] = useState([])
+
+
+
   return (
     <ProductState>
       
@@ -28,6 +40,9 @@ function App() {
           <Route exact path="/order-supplier" element={<Supplier />} />
           <Route exact path="/products" element={<Users />} />
           <Route exact path="/admin-products" element={<AdminShowProducts />} />
+          <Route exact path="/products/cart" element={<UserCart />} />
+          
+          
         </Routes>
       </div>
     </ProductState>
@@ -35,4 +50,7 @@ function App() {
   );
 }
 
+/*
+Hey Cody here.
+*/
 export default App;
