@@ -38,8 +38,12 @@ const ProductState = (props) => {
     }
 
     const editHandler = (id,updatedProduct) => {
-        // console.log(id);
         
+        const url = `https://fakestoreapi.com/products/${id}`
+        console.log(url);
+        axios.patch(url, updatedProduct).then(res=>{
+            console.log(res);
+        })
         console.log("Edit Form")
         console.log(updatedProduct);
         setProductDetails(productDetails.map((ele) => {
@@ -56,20 +60,20 @@ const ProductState = (props) => {
     const detailsHandler = () => {
         const data = {
             //property names can be set according to the api
-            id: Math.random().toString(),
+            // id: Math.random().toString(),
             title: productName,
             price: productPrice,
             category: category,
             image: image
         }
-        setProductDetails((prevState => {
-            return [
-                ...prevState, data
-            ]
-        }))
         const url="https://fakestoreapi.com/products";
         axios.post(url,data).then(res=>{
             console.log(res);
+            setProductDetails((prevState => {
+                return [
+                    ...prevState, res.data
+                ]
+            }))
         })
         setProductName('');
         setCategory('');

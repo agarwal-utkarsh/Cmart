@@ -32,10 +32,6 @@ const Product = () => {
       alert("Price should be greater than 0");
       return;
     }
-    console.log(productContext.productName)
-    console.log(productContext.productPrice)
-    console.log(productContext.category)
-    console.log(productContext.image);
     productContext.detailsHandler();
   }
 

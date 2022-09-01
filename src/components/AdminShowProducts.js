@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Grid, Card, CardContent, CardMedia, Typography, Button, CardActionArea, CardActions, Modal } from '@mui/material'
+import { Box, Grid, Card, CardContent, CardMedia, Typography, Button, CardActionArea, CardActions, Modal, MenuItem, TextField } from '@mui/material'
 import ProductContext from '../context/product-context';
 import AdminNavbar from './AdminNavbar';
 import EditProduct from './EditProducts';
@@ -12,6 +12,7 @@ const AdminShowProducts = () => {
   const productContext = React.useContext(ProductContext);
 
   const [open, setOpen] = React.useState(false);
+  // const [filteredProducts,setFilteredProducts]=React.useState(productContext.productDetails);
   const [editItem, setEditItem] = React.useState('');
   const showModal = (item) => {
     setEditItem(item);
@@ -23,6 +24,11 @@ const AdminShowProducts = () => {
     console.log(item);
     productContext.deleteHandler(item.id);
   }
+
+  // const filterProductsChange=(e)=>{ //How to perform 
+  //   console.log(e.target.value);
+  //   console.log(productContext.productDetails.filter(ele=>ele.category===e.target.value));
+  // }
 
   React.useEffect(() => {
     hideModal();
@@ -45,11 +51,19 @@ const AdminShowProducts = () => {
 
       <AdminNavbar />
       <Typography variant="h3">Products Listed</Typography>
+      <TextField required label="Category" sx={{ marginBottom: "8px", width: "50%" }} select >
+
+        <MenuItem value="">Show All Products</MenuItem>
+        <MenuItem value="electronics" >Electronics</MenuItem>
+        <MenuItem value="medicines" >Medicines</MenuItem>
+        <MenuItem value="grocery" >Grocery</MenuItem>
+
+      </TextField>
       <Box sx={{ marginTop: 5 }}>
         <Grid container spacing={1} >
           {productContext.productDetails.map((item) => (
-            <Grid >
-              <Card sx={{ width: 400, margin: 2.4,backgroundColor:"transparent" }}>
+            <Grid key={item.id} >
+              <Card sx={{ width: 400, margin: 2.4, backgroundColor: "transparent" }}  >
                 <div>
                   <img src={item.image} style={{ height: "300px", widht: "300px" }}></img>
                 </div>

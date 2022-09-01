@@ -10,6 +10,7 @@ import UserLogin from './components/UserLogin';
 import AdminShowProducts from './components/AdminShowProducts';
 import { Button } from '@mui/material';
 import Home from './components/Home';
+import Supplier from './components/Supplier';
 
 
 function App() {
@@ -22,10 +23,9 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/admin-login" element={<AdminLogin />} />
-          <Route exact path="/admin-logout" element={<AdminLogin />} />
           <Route exact path="/user-login" element={<UserLogin />} />
-          <Route exact path="/user-logout" element={<UserLogin />} />
           <Route exact path="/add-products" element={<Product />} />
+          <Route exact path="/order-supplier" element={<Supplier />} />
           <Route exact path="/products" element={<Users />} />
           <Route exact path="/admin-products" element={<AdminShowProducts />} />
         </Routes>

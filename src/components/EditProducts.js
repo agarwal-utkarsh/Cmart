@@ -1,4 +1,5 @@
 import { Box, Button, MenuItem, TextField, Typography } from '@mui/material';
+import axios from 'axios';
 import React, { useContext, useState } from 'react'
 import ProductContext from '../context/product-context';
 import AdminNavbar from './AdminNavbar';
@@ -44,16 +45,16 @@ const EditProduct = (props) => {
             alert("Price should be greater than 0");
             return;
         }
-        {/* item.name according to the data base api */}
-        const updatedProduct={
-            id:id,
-            title:editProductName,
-            price:editProductPrice,
-            category:editProductCategory,
-            image:editProductImage,
+        {/* item.name according to the data base api */ }
+        const updatedProduct = {
+            id: id,
+            title: editProductName,
+            price: editProductPrice,
+            category: editProductCategory,
+            image: editProductImage,
         }
+        productContext.editHandler(id, updatedProduct);
         
-        productContext.editHandler(id,updatedProduct);
     }
 
     return (
