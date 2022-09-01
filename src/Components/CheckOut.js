@@ -16,6 +16,7 @@ import {useState} from 'react'
 
 const CheckOut = (props) => {
   console.log(props.co)
+
   const [ total , setTotal ] = useState(0)
     
 
@@ -24,7 +25,42 @@ const CheckOut = (props) => {
 
         <h1>CheckOut Page</h1>
 
-        <Box sx={{ flexGrow: 1 }}>
+
+        <Card sx={{ maxWidth: 345 }}>
+      <CardActionArea>
+      <Typography variant="body2" color="text.secondary">
+            Congratulations!! Your Order No. {props.co.id} has been placed Successfully
+            for {props.co.productQuantity} Units
+          </Typography>
+        <CardMedia
+          component="img"
+          height="375"
+          image={props.co.image}
+          alt="green iguana"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {props.co.productName}
+          </Typography>
+          <Typography gutterBottom variant="h5" component="div">
+            {props.co.id}
+          </Typography>
+          <Typography gutterBottom variant="h5" component="div">
+            {props.co.productQuantity}
+          </Typography>
+
+        </CardContent>
+        <Typography variant="h4" color="text.primary" textAlign="center" component="div">
+            Amount to be Paid is Rs. {props.co.productPrice * props.co.productQuantity} /-
+          </Typography>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary">
+          Share
+        </Button>
+      </CardActions>
+    </Card>
+        {/* <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={1} alignItems="center" justifyContent="center" >
         {props.co.map( (item) => (
         <Grid>
@@ -42,11 +78,11 @@ const CheckOut = (props) => {
                     <CardContent>
  
                     <Typography gutterBottom variant="h4" component="div">
-                        {item.name}
+                        {item.productName}
                     </Typography>
 
                     <Typography gutterBottom variant="h5" component="div">
-                        Rs. {item.price} /-
+                        Rs. {item.productPrice} /-
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                     Number of Unit/s: {item.count}
@@ -62,7 +98,7 @@ const CheckOut = (props) => {
         </Grid>
         ) )}
       </Grid>
-    </Box>
+    </Box> */}
 
 
     </>

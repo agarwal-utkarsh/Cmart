@@ -2,6 +2,7 @@ import * as React from 'react';
 import {Box,Paper,Grid,Card,CardContent,CardMedia,Typography,Button, CardActionArea, CardActions } from '@mui/material'
 import { styled } from '@mui/material/styles';
 import UserCart from './UserCart';
+import {Link} from 'react-router-dom';
 import { useState } from 'react'
 import ProductContext from '../context/product-context';
 
@@ -31,15 +32,13 @@ const Users = () => {
         
         const newData = {
             id: curElem.id,
-            name: curElem.productName,
-            price: curElem.productPrice,
+            productName: curElem.productName,
+            productPrice: curElem.productPrice,
             image: curElem.image,
             quantity: curElem.quantity,
             count: curElem.buy_quantity,
         };
         setCart([...cartp , newData]);
-
-
         
     };
 
@@ -81,7 +80,9 @@ const Users = () => {
     <>
     
         <h1>User Page</h1>
-       
+        <Link to="/products/cart">
+        <Button variant="contained">Cart</Button>
+        </ Link>
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={1} alignItems="center" justifyContent="center" display={'-ms-inline-flexbox'}  >
         {productContext.productDetails.map( (item) => (
@@ -108,6 +109,7 @@ const Users = () => {
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
+
                     <Button size="small" color="primary" onClick={ () => addCart(item) }>
                     Add to Cart
                     </Button>
@@ -118,7 +120,7 @@ const Users = () => {
       </Grid>
     </Box>
 
-    <UserCart uc={cartp}/>
+ <UserCart uc={cartp}/> 
     </>
   )
 }
