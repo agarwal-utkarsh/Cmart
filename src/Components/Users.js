@@ -3,6 +3,7 @@ import {Box,Paper,Grid,Card,CardContent,CardMedia,Typography,Button, CardActionA
 import { styled } from '@mui/material/styles';
 import UserCart from './UserCart';
 import { useState } from 'react'
+import Navbar from './Navbar';
 import ProductContext from '../context/product-context';
 
 
@@ -55,12 +56,12 @@ const Users = () => {
 
   return (
     <>
-    
+    <Navbar />
         <h1>User Page</h1>
        
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={1}>
-        {items.map( (item) => (
+        {productContext.productDetails.map( (item) => (
         <Grid>
             <Card sx={{ maxWidth: 345 }}>
                 <CardActionArea>
@@ -72,11 +73,11 @@ const Users = () => {
                     />
                     <CardContent>
                     <Typography gutterBottom variant="h4" component="div">
-                        {item.productName}
+                        {item.title}
                     </Typography>
 
                     <Typography gutterBottom variant="h5" component="div">
-                        {item.productPrice}
+                        {item.price}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         Lizards are a widespread group of squamate reptiles, with over 6,000
