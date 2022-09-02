@@ -12,8 +12,9 @@ const AdminShowProducts = () => {
   const productContext = React.useContext(ProductContext);
 
   const [open, setOpen] = React.useState(false);
-  // const [filteredProducts,setFilteredProducts]=React.useState(productContext.productDetails);
+  const [filteredProducts, setFilteredProducts] = React.useState([]);
   const [editItem, setEditItem] = React.useState('');
+  const [showCategory, setShowCategory] = React.useState('');
   const showModal = (item) => {
     setEditItem(item);
     setOpen(true);
@@ -21,19 +22,35 @@ const AdminShowProducts = () => {
   const hideModal = () => setOpen(false);
 
   const deleteProducts = (item) => {
-    console.log(item);
+    console.log(item.id);
     productContext.deleteHandler(item.id);
   }
 
-  // const filterProductsChange=(e)=>{ //How to perform 
-  //   console.log(e.target.value);
-  //   console.log(productContext.productDetails.filter(ele=>ele.category===e.target.value));
-  // }
+  const filterProductsChange = (e) => { 
+
+    setShowCategory(e.target.value);
+   
+
+  }
+
+  React.useEffect(()=>{
+    setFilteredProducts(productContext.productDetails)
+    console.log(productContext.productDetails);
+  },[])
 
   React.useEffect(() => {
     hideModal();
 
   }, [productContext.productDetails])
+
+  React.useEffect(() => {
+    if (showCategory === "") {
+      setFilteredProducts(productContext.productDetails)
+    }
+    else {
+      setFilteredProducts(productContext.productDetails.filter(ele => ele.category === showCategory))
+    }
+  }, [showCategory,productContext.productDetails])
 
   const style = {
     position: 'absolute',
@@ -51,7 +68,7 @@ const AdminShowProducts = () => {
 
       <AdminNavbar />
       <Typography variant="h3">Products Listed</Typography>
-      <TextField required label="Category" sx={{ marginBottom: "8px", width: "50%" }} select >
+      <TextField required label="Category" sx={{ marginBottom: "8px", width: "50%" }} select onChange={filterProductsChange} >
 
         <MenuItem value="">Show All Products</MenuItem>
         <MenuItem value="electronics" >Electronics</MenuItem>
@@ -61,7 +78,7 @@ const AdminShowProducts = () => {
       </TextField>
       <Box sx={{ marginTop: 5 }}>
         <Grid container spacing={1} >
-          {productContext.productDetails.map((item) => (
+          {filteredProducts.map((item) => (
             <Grid key={item.id} >
               <Card sx={{ width: 400, margin: 2.4, backgroundColor: "transparent" }}  >
                 <div>

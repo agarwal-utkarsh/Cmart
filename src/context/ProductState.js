@@ -1,5 +1,7 @@
-import axios from 'axios';
-import React, {  useEffect, useState } from 'react'
+import { Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react'
+import { addProduct, deleteProduct, editProduct, getProducts } from '../components/API';
+import Loading from '../components/Loading';
 import ProductContext from './product-context';
 
 const ProductState = (props) => {
@@ -7,16 +9,21 @@ const ProductState = (props) => {
     const [category, setCategory] = useState('');
     const [productPrice, setProductPrice] = useState(0);
     const [image, setImage] = useState('');
-    const [productDetails, setProductDetails] = useState([]);   
-      
-    useEffect(()=>{
-        const url="https://fakestoreapi.com/products";
-        axios.get(url).then((res)=>{
-            
-            setProductDetails(res.data);
-        })
+    const [productDetails, setProductDetails] = useState([]);
+    const [errMsg,setErrMsg]=useState('')
+    const [loading,setLoading]=useState(false)
 
-    },[])
+    useEffect(() => {
+        getProducts()
+            .then(response => {
+                setErrMsg('')
+                setProductDetails(response.data);
+            })
+            .catch(error=>{
+                console.log(error.response.status);
+                setErrMsg(`Error-${error.response.status}`)
+            })
+    }, [])
     const nameHandler = (value) => {
         setProductName(value);
     }
@@ -34,23 +41,36 @@ const ProductState = (props) => {
     }
 
     const deleteHandler = (value) => {
-        setProductDetails(productDetails.filter(ele => ele.id !== value));
+        setLoading(true)
+        deleteProduct(value)
+            .then(response => {
+                setLoading(false);
+                console.log(response.data);
+                setProductDetails(productDetails.filter(ele => ele.id !== value));
+            })
+            .catch(error=>{
+                setLoading(false);
+                setErrMsg(`Error-${error.response.status}`)
+
+            })
     }
 
-    const editHandler = (id,updatedProduct) => {
-        
-        const url = `https://fakestoreapi.com/products/${id}`
-        console.log(url);
-        axios.patch(url, updatedProduct).then(res=>{
-            console.log(res);
-        })
-        console.log("Edit Form")
-        console.log(updatedProduct);
-        setProductDetails(productDetails.map((ele) => {
-            return (
-                ele.id === id ? updatedProduct : ele
-            )
-        }))
+    const editHandler = (id, updatedProduct) => {
+        setLoading(true)
+        editProduct(updatedProduct, id)
+            .then(response => {
+                console.log(response);
+                setLoading(false);
+                setProductDetails(productDetails.map((ele) => {
+                    return (
+                        ele.id === id ? updatedProduct : ele
+                    )
+                }))
+            })
+            .catch(error=>{
+                setErrMsg(error.response.status);
+                setLoading(false);
+            })
         setProductName('');
         setCategory('');
         setProductPrice(0);
@@ -66,15 +86,23 @@ const ProductState = (props) => {
             category: category,
             image: image
         }
-        const url="https://fakestoreapi.com/products";
-        axios.post(url,data).then(res=>{
-            console.log(res);
-            setProductDetails((prevState => {
-                return [
-                    ...prevState, res.data
-                ]
-            }))
-        })
+        setLoading(true);
+        addProduct(data)
+            .then(response => {
+                console.log(response.data);
+                setErrMsg('');
+                setLoading(false);
+                setProductDetails(prevState => {
+                    return [
+                        ...prevState, response.data
+                    ]
+                })
+            })
+            .catch(error=>{
+                console.log(error.response)
+                setErrMsg(`Error-${error.response.status}`)
+                setLoading(false);
+            })
         setProductName('');
         setCategory('');
         setProductPrice(0);
@@ -98,7 +126,11 @@ const ProductState = (props) => {
             deleteHandler: deleteHandler,
             editHandler: editHandler,
         }} >
+            <Typography variant='h2' >{errMsg}</Typography>
+            {loading && <Loading />}
             {props.children}
+
+            
         </ProductContext.Provider>
     )
 }
