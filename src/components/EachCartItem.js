@@ -28,6 +28,7 @@ const EachCartItem = (props) => {
         productName: ob.recv.productName,
         productPrice: ob.recv.productPrice,
         image: ob.recv.image,
+        quantity: ob.recv.quantity,
         productQuantity: ob.count, 
       };
 
@@ -37,8 +38,8 @@ const EachCartItem = (props) => {
     };
 
     const deleteHandler = (o1) => {
-      const updatedList = buy.filter( o => o.id !== o1 )
-      setBuy(updatedList)
+      
+      props.remove(o1)
     };
 
     const obj = {
@@ -50,7 +51,7 @@ const EachCartItem = (props) => {
   return (
     <>
     
-    <Card sx={{ maxWidth: 345 , maxHeight: '500px' , marginLeft: '12px' , padding: '7px' , marginTop: '11px' ,marginBottom: '11px'}} >
+    <Card sx={{ maxWidth: 345  , marginLeft: '12px' , padding: '7px' , marginTop: '11px' ,marginBottom: '11px', margin: 2.4, backgroundColor: "transparent"}} >
       <CardMedia
         component="img"
         height="200"
@@ -60,6 +61,12 @@ const EachCartItem = (props) => {
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {recv.productName} {recv.id}
+        </Typography>
+        <Typography gutterBottom variant="h7" component="div">
+          Product ID {recv.id}
+        </Typography>
+        <Typography gutterBottom variant="h5" component="div">
+          {recv.quantity}
         </Typography>
         <Typography variant="body2" color="text.secondary">
         Rs. {recv.productPrice} /-
@@ -79,7 +86,7 @@ const EachCartItem = (props) => {
       <CardActions>
 
         <Button onClick={ () => checkOut(obj)}>Buy Now</Button>
-        <Button onClick={ () => deleteHandler(buy.id) }>Remove From Cart</Button>
+        <Button onClick={ () => deleteHandler(recv.id) }>Remove From Cart</Button>
       </CardActions>
     </Card>
 

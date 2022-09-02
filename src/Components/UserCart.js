@@ -26,6 +26,7 @@ import NativeSelect from '@mui/material/NativeSelect';
 import InputBase from '@mui/material/InputBase';
 import {useState , useEffect} from 'react'
 //import CheckOut from './CheckOut'
+
 import EachCartItem from './EachCartItem';
 
 
@@ -35,13 +36,24 @@ import EachCartItem from './EachCartItem';
 
 const UserCart = (props) => {
 
-    console.log(props.uc)
+    
 
 
-    const [ recv , setRecv ] = useState(props.uc)
+    const [ recv , setRecv ] = useState([])
+
+    
 
 
+    useEffect(() => {
+      setRecv(props.uc)
+    }, [props.uc])
 
+    useEffect(() => {
+      setRecv(props.uc)
+    }, [])
+    
+
+    
 
   
 
@@ -120,9 +132,19 @@ const UserCart = (props) => {
         },
       }));
 
-      // const removeCartHandler = (index) => {
-      //   setRecv(recv.filter( (curElem) =>  curElem.id !== index))
-      // };
+       const removeHandler = (index) => {
+        
+        const i = props.uc.findIndex(element => {
+          if(element.id === index) {
+            return true
+          }
+          return false
+        }) 
+        setRecv(recv.filter( (curElem) =>  curElem.id !== index))
+        console.log(i)
+        props.uc.splice(i , 0) 
+
+       };
 
 
 
@@ -134,16 +156,17 @@ const UserCart = (props) => {
         <h1>Users Cart</h1>
         <Box sx={{ flexGrow: 1 }} m={3} p={5}  >
       <Grid container spacing={1} alignItems="center" justifyContent="center" display={'-ms-inline-flexbox'} flexDirection={'column'}  >
-        {props.uc.map( (item) => (
+        {recv.map( (item) => (
             <>
             <EachCartItem 
             id= {item.id}
             image= {item.image}
             productName= {item.productName}
             productPrice= {item.productPrice}
-            
+            quantity= {item.quantity}
+            remove= {removeHandler}
             />
-  
+            {/* <Button onClick={ () => removeHandler(item.id) }>Remove From Cart</Button> */}
             </>
             
             
