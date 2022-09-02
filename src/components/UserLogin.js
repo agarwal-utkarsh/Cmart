@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
-import axios from 'axios';
 import Navbar from './Navbar';
-import { Navigate } from 'react-router-dom';
+import { loginUser } from './API';
 
 const UserLogin = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
-    const [token, setToken] = useState('')
-    const [loading,setLoading]=useState(false)
+    const [loading, setLoading] = useState(false)
+    const [errMsg, setErrMsg] = useState('');
     const userNameChangeHandler = (e) => {
         setUserName(e.target.value);
     }
@@ -16,24 +15,32 @@ const UserLogin = () => {
         setPassword(e.target.value);
     }
 
+    useEffect(() => {
+        setErrMsg('');
+    }, [userName, password])
+
     const submitHandler = (e) => {
         e.preventDefault();
         setLoading(true);
         const userData = {
-            email: userName, // username or eamil as per requirement by the api
+            username: userName, // username or eamil as per requirement by the api
             password: password,
         }
-        
-        const url = 'https://reqres.in/api/login';
-        axios.post(url, userData).then(res => {
-            console.log(res.data.token);
-            setToken(res.data.token);
-            localStorage.setItem("token", res.data.token);
-            setLoading(false);
-            setPassword('');
-            
-        })
 
+
+        loginUser(userData)
+            .then(res => {
+                console.log(res.data.token);
+                setErrMsg('');
+                localStorage.setItem("token", res.data.token)
+                setLoading(false);
+            })
+            .catch(error => {
+                setLoading(false);
+                setErrMsg(error.response.data);
+                console.log(error.response.data);
+
+            })
     }
 
     return (
@@ -65,6 +72,7 @@ const UserLogin = () => {
 
                             <TextField required sx={{ marginBottom: "8px", width: "50%" }} variant="outlined" onChange={passwordChangeHandler} type="password" label="Password" value={password} />
                             {loading && <Typography variant="h5">Logging you in...</Typography>}
+                            {errMsg && <Typography variant="h5">{errMsg}</Typography>}
                         </div>
 
 
@@ -72,9 +80,9 @@ const UserLogin = () => {
 
                     </form>
                 </Box>
-                :
-                <Navbar /> 
-                 
+                    :
+                    <Navbar />
+
             }
 
         </div>

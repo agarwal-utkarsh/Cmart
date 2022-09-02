@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import AdminNavbar from './AdminNavbar';
 import { Navigate } from 'react-router-dom';
+import { loginAdmin } from './API';
 
 const AdminLogin = () => {
     const [adminName, setAdminName] = useState('');
     const [password, setPassword] = useState('');
-    const [token, setToken] = useState('')
-    const [loading,setLoading]=useState(false);
+    const [errMsg, setErrMsg] = useState('');
+    const [loading, setLoading] = useState(false);
     const adminNameChangeHandler = (e) => {
         setAdminName(e.target.value);
     }
     const passwordChangeHandler = (e) => {
         setPassword(e.target.value);
     }
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [adminName, password])
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -23,26 +28,18 @@ const AdminLogin = () => {
             email: adminName, // username or eamil as per requirement by the api
             password: password,
         }
-        const data = JSON.stringify(adminData)
-        console.log(data);
-        const url = 'https://reqres.in/api/login';
-        axios.post(url, adminData).then(res => {
-            
-            setToken(res.data.token);
-            // setIsLogin(true);
-            localStorage.setItem("token",res.data.token);
-            localStorage.setItem("isLogin",true);
-            setLoading(false);
 
-            if (res.data.token) {
-                console.log("Token generated");
-            }
-        })
-            
-       
-        setPassword('');
-        
-
+        loginAdmin(adminData)
+            .then(response => {
+                localStorage.setItem("token", response.data.token);
+                console.log(response.data.token);
+                setErrMsg('')
+                setLoading(false)
+            })
+            .catch(error => {
+                setErrMsg(error.response.data.error);
+                setLoading(false);
+            })
     }
 
     return (
@@ -74,7 +71,8 @@ const AdminLogin = () => {
 
                             <TextField required sx={{ marginBottom: "8px", width: "50%" }} variant="outlined" onChange={passwordChangeHandler} type="password" label="Password" value={password} />
                             {loading && <Typography variant="h5">Logging you in...</Typography>}
-                            
+                            {errMsg && <Typography variant="h5">{errMsg}</Typography>}
+
                         </div>
 
 
@@ -82,9 +80,9 @@ const AdminLogin = () => {
 
                     </form>
                 </Box>
-                :
-                <AdminNavbar /> 
-                 
+                    :
+                    <AdminNavbar />
+
             }
 
         </div>

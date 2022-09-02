@@ -9,6 +9,7 @@ const AdminNavbar = () => {
                 <Link to="/add-products" style={{ textDecoration: "none" }}><Button variant='oulined' sx={{ color: "white" }}>Add Products</Button></Link>
                 <Link to="/admin-products" style={{ textDecoration: "none" }}><Button variant='oulined' sx={{ color: "white" }}>Show Products</Button></Link>
                 <Link to="/order-supplier" style={{ textDecoration: "none" }}><Button variant='oulined' sx={{ color: "white" }}>Fill Inventory</Button></Link>
+                <Link to="/get-users" style={{ textDecoration: "none" }}><Button variant='oulined' sx={{ color: "white" }}>Customers</Button></Link>
                 <Link to="/" style={{ textDecoration: "none" }}><Button onClick={()=>{
                     localStorage.clear("token");
                     localStorage.clear("isLogin");

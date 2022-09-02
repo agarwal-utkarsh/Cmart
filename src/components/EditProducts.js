@@ -15,6 +15,7 @@ const EditProduct = (props) => {
     const [editProductPrice, setEditProductPrice] = useState(props.item.price);
     const [editProductCategory, setEditProductCategory] = useState(props.item.category);
     const [editProductImage, setEditProductImage] = useState(props.item.image);
+    
 
 
 
