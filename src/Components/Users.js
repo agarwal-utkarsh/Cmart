@@ -33,11 +33,10 @@ const Users = () => {
         
         const newData = {
             id: curElem.id,
-            productName: curElem.productName,
-            productPrice: curElem.productPrice,
+            productName: curElem.title,
+            productPrice: curElem.price,
             image: curElem.image,
             quantity: curElem.quantity,
-            count: curElem.buy_quantity,
         };
         setCart([...cartp , newData]);
         
@@ -88,21 +87,23 @@ const Users = () => {
       <Grid container spacing={1} alignItems="center" justifyContent="center" display={'-ms-inline-flexbox'}  >
         {productContext.productDetails.map( (item) => (
         <Grid>
-            <Card sx={{ maxWidth: 345 , maxHeight: '500px' , marginLeft: '12px' , padding: '7px' , marginTop: '11px' ,marginBottom: '11px'}}  >
+            <Card sx={{ maxWidth: 345 , maxHeight: '600px' , marginLeft: '12px' , padding: '7px' , marginTop: '11px' , marginBottom: '11px', margin: 2.4, backgroundColor: "transparent"}}  >
                 <CardActionArea>
+                    <div>
                     <CardMedia
                     component="img"
                     height="250"
                     image={item.image}
                     alt="POC"
                     />
+                    </div>
                     <CardContent>
                     <Typography gutterBottom variant="h4" component="div">
                         {item.title}
                     </Typography>
 
                     <Typography gutterBottom variant="h5" component="div">
-                        {item.price}
+                        Rs. {item.price} /-
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                     Numer of Items Available: {item.quantity}

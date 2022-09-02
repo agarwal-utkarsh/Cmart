@@ -26,7 +26,7 @@ const CheckOut = (props) => {
         <h1>CheckOut Page</h1>
 
 
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345, margin: 2.4, backgroundColor: "transparent" }}>
       <CardActionArea>
       <Typography variant="body2" color="text.secondary">
             Congratulations!! Your Order No. {props.co.id} has been placed Successfully
@@ -42,11 +42,11 @@ const CheckOut = (props) => {
           <Typography gutterBottom variant="h5" component="div">
             {props.co.productName}
           </Typography>
-          <Typography gutterBottom variant="h5" component="div">
-            {props.co.id}
+          <Typography gutterBottom variant="h7" component="div">
+            Product ID - {props.co.id}
           </Typography>
-          <Typography gutterBottom variant="h5" component="div">
-            {props.co.productQuantity}
+          <Typography gutterBottom variant="h7" component="div">
+            Number of Units Purchased - {props.co.productQuantity}
           </Typography>
 
         </CardContent>
