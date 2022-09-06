@@ -81,10 +81,10 @@ const ProductState = (props) => {
         const data = {
             //property names can be set according to the api
             // id: Math.random().toString(),
-            title: productName,
+            name: productName,
             price: productPrice,
-            category: category,
-            image: image
+            description: category,
+            pictureUrl: image
         }
         setLoading(true);
         addProduct(data)

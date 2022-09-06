@@ -25,7 +25,7 @@ const AdminLogin = () => {
         e.preventDefault();
         setLoading(true)
         const adminData = {
-            email: adminName, // username or eamil as per requirement by the api
+            username: adminName, // username or eamil as per requirement by the api
             password: password,
         }
 
@@ -37,7 +37,7 @@ const AdminLogin = () => {
                 setLoading(false)
             })
             .catch(error => {
-                setErrMsg(error.response.data.error);
+                setErrMsg(error.response.data.title);
                 setLoading(false);
             })
     }
@@ -76,7 +76,13 @@ const AdminLogin = () => {
                         </div>
 
 
-                        <Button type="submit" variant="outlined" sx={{ color: "purple" }} >Login</Button>
+                        <Button type="submit" variant="outlined" sx={{
+                            color: "white",border:"none", bgcolor: "green", ":hover": {
+                                bgcolor: "#17994f",
+                                color: "white",
+                                border:"none"
+                            }
+                        }} >Login</Button>
 
                     </form>
                 </Box>

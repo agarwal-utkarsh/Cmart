@@ -30,15 +30,16 @@ const UserLogin = () => {
 
         loginUser(userData)
             .then(res => {
-                console.log(res.data.token);
+                // console.log(res.data);
                 setErrMsg('');
                 localStorage.setItem("token", res.data.token)
                 setLoading(false);
             })
             .catch(error => {
                 setLoading(false);
-                setErrMsg(error.response.data);
-                console.log(error.response.data);
+                setErrMsg(error.response.data.title);
+                console.log(error.response.data.title);
+
 
             })
     }
@@ -76,7 +77,13 @@ const UserLogin = () => {
                         </div>
 
 
-                        <Button type="submit" variant="outlined" sx={{ color: "purple" }} >Login</Button>
+                        <Button type="submit" variant="outlined" sx={{
+                            color: "white", border: "none", bgcolor: "green", ":hover": {
+                                bgcolor: "#17994f",
+                                color: "white",
+                                border: "none"
+                            }
+                        }} >Login</Button>
 
                     </form>
                 </Box>
