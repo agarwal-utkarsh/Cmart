@@ -84,7 +84,12 @@ const Product = () => {
               </div>
 
 
-              <Button type="submit" variant="outlined" sx={{ color: "purple" }} >Submit</Button>
+              <Button type="submit" variant="outlined" sx={{
+                color: "white", bgcolor: "green", ":hover": {
+                  bgcolor: "#17994f",
+                  color: "white"
+                }
+              }} >Submit</Button>
 
             </form>
           </Box>

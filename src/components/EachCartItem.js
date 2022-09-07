@@ -12,7 +12,7 @@ import { Routes, Route, Link} from 'react-router-dom';
 import {useState} from 'react'
 
 const EachCartItem = (props) => {
-    console.log(props)
+    // console.log(props)
 
     const [ recv , setRecv ] = useState(props)
     const [ count , setCount ] = useState(1)
@@ -20,8 +20,8 @@ const EachCartItem = (props) => {
 
     
     const checkOut = ( ob ) => {
-      console.log(ob.recv.id)
-      console.log(ob.count)
+      // console.log(ob.recv.id)
+      // console.log(ob.count)
 
       const newDat = {
         id: ob.recv.id,

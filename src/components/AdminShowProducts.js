@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Grid, Card, CardContent, CardMedia, Typography, Button, CardActionArea, CardActions, Modal, MenuItem, TextField } from '@mui/material'
+import { Box, Grid, Card, CardContent, Typography, Button, CardActions, Modal, MenuItem, TextField } from '@mui/material'
 import ProductContext from '../context/product-context';
 import AdminNavbar from './AdminNavbar';
 import EditProduct from './EditProducts';
@@ -14,7 +14,7 @@ const AdminShowProducts = () => {
   const [open, setOpen] = React.useState(false);
   const [filteredProducts, setFilteredProducts] = React.useState([]);
   const [editItem, setEditItem] = React.useState('');
-  const [showCategory, setShowCategory] = React.useState('');
+  const [showCategory, setShowCategory] = React.useState("allProducts");
   const showModal = (item) => {
     setEditItem(item);
     setOpen(true);
@@ -26,17 +26,18 @@ const AdminShowProducts = () => {
     productContext.deleteHandler(item.id);
   }
 
-  const filterProductsChange = (e) => { 
+  const filterProductsChange = (e) => {
 
     setShowCategory(e.target.value);
-   
+
 
   }
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     setFilteredProducts(productContext.productDetails)
-    console.log(productContext.productDetails);
-  },[])
+
+
+  }, [])
 
   React.useEffect(() => {
     hideModal();
@@ -44,13 +45,13 @@ const AdminShowProducts = () => {
   }, [productContext.productDetails])
 
   React.useEffect(() => {
-    if (showCategory === "") {
+    if (showCategory === "allProducts") {
       setFilteredProducts(productContext.productDetails)
     }
     else {
-      setFilteredProducts(productContext.productDetails.filter(ele => ele.category === showCategory))
+      setFilteredProducts(productContext.productDetails.filter(ele => ele.description === showCategory))
     }
-  }, [showCategory,productContext.productDetails])
+  }, [showCategory, productContext.productDetails])
 
   const style = {
     position: 'absolute',
@@ -66,11 +67,12 @@ const AdminShowProducts = () => {
   return (
     <>
 
-      <AdminNavbar />
+      
+      {localStorage.getItem("token") && <AdminNavbar /> }
       <Typography variant="h3">Products Listed</Typography>
-      <TextField required label="Category" sx={{ marginBottom: "8px", width: "50%" }} select onChange={filterProductsChange} >
+      <TextField required label="Category" sx={{ marginBottom: "8px", width: "50%" }} select onChange={filterProductsChange} value={showCategory} >
 
-        <MenuItem value="">Show All Products</MenuItem>
+        <MenuItem value="allProducts">All Products</MenuItem>
         <MenuItem value="electronics" >Electronics</MenuItem>
         <MenuItem value="medicines" >Medicines</MenuItem>
         <MenuItem value="grocery" >Grocery</MenuItem>
@@ -82,11 +84,11 @@ const AdminShowProducts = () => {
             <Grid key={item.id} >
               <Card sx={{ width: 400, margin: 2.4, backgroundColor: "transparent" }}  >
                 <div>
-                  <img src={item.image} style={{ height: "300px", widht: "300px" }}></img>
+                  <img src={item.pictureUrl} style={{ height: "300px", widht: "300px" }}></img>
                 </div>
                 <CardContent>
                   <Typography variant="h4" >
-                    {item.title}
+                    {item.name}
                   </Typography>
                   {/* item.{property name } can be changed according to the api  */}
                   <Typography variant="h5" >
@@ -95,10 +97,22 @@ const AdminShowProducts = () => {
                 </CardContent>
 
                 <CardActions>
-                  <Button size="small" color="primary" varinat="outlined" onClick={() => deleteProducts(item)}>
+                  <Button sx={{
+                    border: "none", color: "white", bgcolor: "red", ":hover": {
+                      color: "white",
+                      bgcolor: "#fc4242",
+                      border: "none"
+                    }
+                  }} size="small" color="primary" varinat="outlined" onClick={() => deleteProducts(item)}>
                     Delete
                   </Button>
-                  <Button size="small" color="primary" varinat="outlined" onClick={() => showModal(item)}>
+                  <Button sx={{
+                    border: "none", color: "white", bgcolor: "#0257c7", ":hover": {
+                      color: "white",
+                      bgcolor: "#2f86fa",
+                      border: "none"
+                    }
+                  }} size="small" color="primary" varinat="outlined" onClick={() => showModal(item)}>
                     Edit
                   </Button>
                 </CardActions>
