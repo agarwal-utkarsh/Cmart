@@ -69,8 +69,8 @@ const AdminShowProducts = () => {
 
       
       {localStorage.getItem("token") && <AdminNavbar /> }
-      <Typography variant="h3">Products Listed</Typography>
-      <TextField required label="Category" sx={{ marginBottom: "8px", width: "50%" }} select onChange={filterProductsChange} value={showCategory} >
+      <Typography variant="h3" sx={{marginLeft: "3rem" , marginBottom:"12px"}}>Products Listed</Typography>
+      <TextField required label="Category" sx={{ marginBottom: "8px", width: "30%" , marginLeft: "4rem" }} select onChange={filterProductsChange} value={showCategory} >
 
         <MenuItem value="allProducts">All Products</MenuItem>
         <MenuItem value="electronics" >Electronics</MenuItem>
@@ -79,14 +79,14 @@ const AdminShowProducts = () => {
 
       </TextField>
       <Box sx={{ marginTop: 5 }}>
-        <Grid container spacing={1} >
+        <Grid container spacing={0.8} >
           {filteredProducts.map((item) => (
             <Grid key={item.id} >
-              <Card sx={{ width: 400, margin: 2.4, backgroundColor: "transparent" }}  >
+              <Card sx={{ width: 400, margin: 1.4, backgroundColor: "transparent" }}  >
                 <div>
-                  <img src={item.pictureUrl} style={{ height: "300px", widht: "300px" }}></img>
+                  <img src={item.pictureUrl} style={{ height: "300px", width: "400px" }}></img>
                 </div>
-                <CardContent>
+                <CardContent sx={{ padding:"18px" }}>
                   <Typography variant="h4" >
                     {item.name}
                   </Typography>

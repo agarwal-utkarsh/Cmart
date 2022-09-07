@@ -7,6 +7,7 @@ import Users from './Users';
 const Home = () => {
     return (
         <div style={{position:"relative"}}>
+            <Typography variant="h2" sx={{marginLeft: "13px" , marginBottom: "9px" , textAlign:"center" , marginTop:"2rem"}}>C-Mart</Typography>
             <LoginButton />
             
             <Users />

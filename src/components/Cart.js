@@ -129,6 +129,10 @@ const Cart = () => {
 
     const buyNowHandler = () => {
         // console.log(cartItems)
+        if(cartItems.length === 0) {
+            alert("Your Cart is Empty")
+            return
+        }
         cartItems.forEach((item) => {
             // console.log(item.product)
             // console.log(item)
@@ -155,7 +159,7 @@ const Cart = () => {
         <div >
             <Navbar />
             {loading === true && <Loading />}
-            <h3>Total Amount - Rs {total} </h3>
+            <Typography variant="h4" sx={{ marginTop: "12px" , marginLeft: "17px"  }}>Total Amount - Rs {total}</Typography> 
             <Button onClick={buyNowHandler} variant='contained' sx={{
                 color: "white", bgcolor: "green", position: "absolute", right: "2rem", ":hover": {
                     bgcolor: "#17994f",
