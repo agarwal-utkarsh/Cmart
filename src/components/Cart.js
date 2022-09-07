@@ -3,7 +3,7 @@ import { buyNow, clearCart, editCart, getCart, getTotal, removeCart } from './AP
 import Navbar from './Navbar';
 import { Card, Grid, Box, CardContent, Typography, CardActions, Button, TextField } from '@mui/material'
 import Loading from './Loading';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -175,7 +175,7 @@ const Cart = () => {
                                 <Card sx={{ width: 400, margin: 2.4, backgroundColor: "transparent" }}  >
                                     <CardContent>
                                         <div>
-                                            <img src={ele.product.pictureUrl} style={{ height: "300px", widht: "300px" }}></img>
+                                            <img src={ele.product.pictureUrl} alt={ele.product.name} style={{ height: "300px", widht: "300px" }}></img>
                                         </div>
                                         <Typography variant="h4" >
                                             {/* {item.name} */}
