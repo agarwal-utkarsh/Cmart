@@ -12,7 +12,14 @@ const LoginButton = () => {
     
   return (
     <div>
-        <Button variant="outlined" sx={{color:'white',bgcolor:"black",position:"absolute",right:"4rem",top:"2rem"}} aria-controls="menu-appbar" onClick={handleClose}>
+        <Button variant="outlined" sx={{ position: "absolute" , right: "4rem" , top: "2rem",
+                            color: "white", border: "none", bgcolor: "green", ":hover": {
+                                bgcolor: "#17994f",
+                                color: "white",
+                                
+                                border: "none",
+                            }
+                        }} aria-controls="menu-appbar" onClick={handleClose}>
             Login
         </Button>
         <Menu

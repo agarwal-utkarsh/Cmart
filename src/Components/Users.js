@@ -57,8 +57,8 @@ const Users = () => {
       
       {localStorage.getItem("token") && <Navbar /> }
       {loading && <Loading />}
-      <Typography variant="h3"> Available Products </Typography>
-      <TextField required label="Category" sx={{ marginBottom: "8px", width: "50%" }} select onChange={filterProductsChange} value={showCategory} >
+      {/* <Typography variant="h3"> Available Products </Typography> */}
+      <TextField required label="Category" sx={{ marginTop: "15px", marginBottom: "8px", width: "30%" , marginLeft: "4rem" }} select onChange={filterProductsChange} value={showCategory} >
 
         <MenuItem value="allProducts">All Products</MenuItem>
         <MenuItem value="electronics" >Electronics</MenuItem>
@@ -68,14 +68,14 @@ const Users = () => {
       </TextField>
 
       <Box sx={{ marginTop: 5 }}>
-        <Grid container spacing={1} alignItems="center" justifyContent="center" display={'-ms-inline-flexbox'} >
+        <Grid container spacing={0.8} alignItems="center" justifyContent="center" display={'-ms-inline-flexbox'} >
           {filteredProducts.map((item) => (
             <Grid key={item.id} >
-              <Card sx={{ width: 400, margin: 2.4, backgroundColor: "transparent" }}  >
+              <Card sx={{ width: 400, margin: 1.4, backgroundColor: "transparent" }}  >
                 <div>
-                  <img src={item.pictureUrl} alt={item.name} style={{ height: "300px", widht: "300px" }}></img>
+                  <img src={item.pictureUrl} alt={item.name} style={{ height: "300px", width: "400px" }}></img>
                 </div>
-                <CardContent>
+                <CardContent sx={{ padding: "18px" }}>
                   <Typography variant="h4" >
                     {item.name}
                   </Typography>
