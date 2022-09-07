@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React from 'react'
 import Users from './components/Users'
 import './App.css';
 import Product from './components/Product';
@@ -8,8 +8,7 @@ import AdminLogin from './components/AdminLogin';
 import UserLogin from './components/UserLogin';
 import AdminShowProducts from './components/AdminShowProducts';
 import Home from './components/Home';
-import Supplier from './components/Supplier';
-import GetUsers from './components/GetUsers';
+
 import UserRegister from './components/UserRegister';
 import Cart from './components/Cart';
 import GetOrders from './components/GetOrders';
@@ -28,9 +27,7 @@ function App() {
           <Route exact path="/admin-login" element={<AdminLogin />} />
           <Route exact path="/user-login" element={<UserLogin />} />
           <Route exact path="/add-products" element={<Product />} />
-          <Route exact path="/order-supplier" element={<Supplier />} />
           <Route exact path="/products" element={<Users />} />
-          <Route exact path="/get-users" element={<GetUsers />} />
           <Route exact path="/admin-products" element={<AdminShowProducts />} />
           <Route exact path="/products/cart" element={<Cart />} />
           <Route exact path="/user-reg" element={<UserRegister />} />

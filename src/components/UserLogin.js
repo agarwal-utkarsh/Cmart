@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import Navbar from './Navbar';
 import { loginUser } from './API';
+import { Link, useNavigate } from 'react-router-dom';
+import Users from './Users';
 
 const UserLogin = () => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false)
     const [errMsg, setErrMsg] = useState('');
+    const navigate=useNavigate()
+
     const userNameChangeHandler = (e) => {
         setUserName(e.target.value);
     }
@@ -28,12 +32,14 @@ const UserLogin = () => {
         }
 
 
+
         loginUser(userData)
             .then(res => {
                 // console.log(res.data);
                 setErrMsg('');
                 localStorage.setItem("token", res.data.token)
                 setLoading(false);
+                navigate('/products')
             })
             .catch(error => {
                 setLoading(false);
@@ -42,6 +48,7 @@ const UserLogin = () => {
 
 
             })
+            
     }
 
     return (
@@ -50,7 +57,8 @@ const UserLogin = () => {
             alignItems: "center",
         }}>
             {
-                !(localStorage.getItem("token")) ? <Box sx={{
+                // !(localStorage.getItem("token")) ?
+                 <Box sx={{
                     width: 600,
                     height: 400,
                     // backgroundColor: '#ccc',
@@ -84,11 +92,13 @@ const UserLogin = () => {
                                 border: "none"
                             }
                         }} >Login</Button>
-
+                        <br />
+                        <Link to="/user-reg">New user? Signup here</Link>
                     </form>
                 </Box>
-                    :
-                    <Navbar />
+                
+
+                    
 
             }
 

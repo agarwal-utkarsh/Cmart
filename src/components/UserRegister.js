@@ -64,7 +64,13 @@ const UserRegister = () => {
                         <TextField onChange={(e) => setPassword(e.target.value)} value={password} required sx={{ marginBottom: "8px", width: "50%" }} variant="outlined" type="password" label="Password" />
 
 
-                        <Button type="submit" variant="outlined" sx={{ color: "purple" }} >Register</Button>
+                        <Button type="submit" variant="outlined" sx={{
+                            color: "white", border: "none", bgcolor: "green", ":hover": {
+                                bgcolor: "#17994f",
+                                color: "white",
+                                border: "none"
+                            }
+                        }}  >Register</Button>
                     </div>
 
 

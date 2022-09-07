@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import AdminNavbar from './AdminNavbar';
-import { Navigate } from 'react-router-dom';
 import { loginAdmin } from './API';
+import { useNavigate } from 'react-router-dom';
 
 const AdminLogin = () => {
     const [adminName, setAdminName] = useState('');
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const [loading, setLoading] = useState(false);
+    const navigate=useNavigate();
+
     const adminNameChangeHandler = (e) => {
         setAdminName(e.target.value);
     }
@@ -35,6 +37,7 @@ const AdminLogin = () => {
                 console.log(response.data.token);
                 setErrMsg('')
                 setLoading(false)
+                navigate('/admin-products')
             })
             .catch(error => {
                 setErrMsg(error.response.data.title);
@@ -48,7 +51,8 @@ const AdminLogin = () => {
             alignItems: "center",
         }}>
             {
-                !(localStorage.getItem("token")) ? <Box sx={{
+                
+                 <Box sx={{
                     width: 600,
                     height: 400,
                     // backgroundColor: '#ccc',
@@ -86,8 +90,7 @@ const AdminLogin = () => {
 
                     </form>
                 </Box>
-                    :
-                    <AdminNavbar />
+                    
 
             }
 

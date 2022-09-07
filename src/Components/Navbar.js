@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppBar, Button, Toolbar, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { getCurrentUser } from './API';
 const Navbar = () => {
+    const [user,setUser]=useState('')
+    useEffect(()=>{
+        getCurrentUser()
+        .then(response=>{
+            setUser(response.data.email);
+            
+        })
+        .catch(error=>{
+            alert(error)
+        })
+    },[])
     return (
         <AppBar position="static">
             <Toolbar disableGutters sx={{ backgroundColor: "black" }}>
@@ -9,6 +21,7 @@ const Navbar = () => {
                 <Link to="/products" style={{ textDecoration: "none" }}><Button variant='oulined' sx={{ color: "white" }}>Show Products</Button></Link>
                 <Link to="/products/cart" style={{ textDecoration: "none" }}><Button variant='oulined' sx={{ color: "white" }}>Cart</Button></Link>
                 <Link to="/get-orders" style={{ textDecoration: "none" }}><Button variant='oulined' sx={{ color: "white" }}>Orders</Button></Link>
+                <Typography sx={{position:"absolute",right:"10rem"}} variant='h8'>{user}</Typography>
                 <Link to="/" style={{ textDecoration: "none" }}><Button onClick={() => {
                     localStorage.clear("token");
                     // localStorage.clear("isLogin");

@@ -67,7 +67,8 @@ const AdminShowProducts = () => {
   return (
     <>
 
-      <AdminNavbar />
+      
+      {localStorage.getItem("token") && <AdminNavbar /> }
       <Typography variant="h3">Products Listed</Typography>
       <TextField required label="Category" sx={{ marginBottom: "8px", width: "50%" }} select onChange={filterProductsChange} value={showCategory} >
 

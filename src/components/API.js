@@ -31,11 +31,11 @@ export const deleteProduct=async (id)=>{
 
 
 
-export const fetchUsers = async () => {
-    const resp = await axios.get(`${url}/users`)
-    return resp;
+// export const fetchUsers = async () => {
+//     const resp = await axios.get(`${url}/users`)
+//     return resp;
 
-}
+// }
 
 // export const fetchUser=async (id)=>{
 //     console.log(id);
@@ -109,5 +109,10 @@ export const getOrderDetails=async(id)=>{
 
 export const clearCart =async()=>{
     const resp=await axios.delete(`${URL}/api/Cart2/DeleteCartItems`,{ headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`} })
+    return resp
+}
+
+export const getCurrentUser=async()=>{
+    const resp=await axios.get(`${URL}/api/Auth/Currentuser`,{ headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`} })
     return resp
 }
