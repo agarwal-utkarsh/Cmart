@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { buyNow, editCart, getCart, getTotal, removeCart } from './API';
+import { buyNow, clearCart, editCart, getCart, getTotal, removeCart } from './API';
 import Navbar from './Navbar';
 import { Card, Grid, Box, CardContent, Typography, CardActions, Button, TextField } from '@mui/material'
 import Loading from './Loading';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -12,6 +13,7 @@ const Cart = () => {
     const [isFetched, setIsFetched] = useState(false)
     const [total, setTotal] = useState(0);
     const [isRefreshed, setisRefreshed] = useState(false)
+    const navigate=useNavigate()
     useEffect(() => {
         setLoading(true)
         getCart()
@@ -117,9 +119,11 @@ const Cart = () => {
                     alert(error)
                 })
             setIsFetched(false)
+            clearCart();
+            navigate('/confirm')
         }
 
-
+        
     }, [isFetched])
 
 
@@ -158,7 +162,7 @@ const Cart = () => {
                     color: "white"
                 }
             }} >Buy Now</Button>
-
+            
             {
                 cartItems.map((ele) => {
                     return (

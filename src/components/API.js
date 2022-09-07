@@ -100,3 +100,14 @@ export const getOrders=async()=>{
     const resp=await axios.get(`${URL}/api/Order`,{ headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`} })
     return resp
 }
+
+export const getOrderDetails=async(id)=>{
+    console.log(id)
+    const resp=await axios.get(`${URL}/api/Order/GetOrders/${id}`,{ headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`} })
+    return resp
+}
+
+export const clearCart =async()=>{
+    const resp=await axios.delete(`${URL}/api/Cart2/DeleteCartItems`,{ headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`} })
+    return resp
+}
