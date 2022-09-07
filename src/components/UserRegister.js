@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { TextField, Button, Box, Typography } from '@mui/material'
 import { addUser } from './API';
+import { useNavigate } from 'react-router-dom';
 
 const UserRegister = () => {
     const [userName, setUserName] = useState('');
@@ -8,6 +9,7 @@ const UserRegister = () => {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate=useNavigate();
 
     const submitHandler=(e)=>{
         e.preventDefault();
@@ -22,8 +24,10 @@ const UserRegister = () => {
         addUser(data)
         .then(res=>{
             console.log(res)
+            navigate('/')
         })
         .catch(error=>{
+            
             console.log(error.response);
         })
         setUserName('');
@@ -61,8 +65,8 @@ const UserRegister = () => {
                         <TextField onChange={(e) => setLastName(e.target.value)} value={lastName} required sx={{ marginBottom: "8px", width: "50%" }} variant="outlined" label="Last Name" />
                         <TextField onChange={(e) => setEmail(e.target.value)} value={email} required sx={{ marginBottom: "8px", width: "50%" }} variant="outlined" label="Email" type="email" />
 
-                        <TextField onChange={(e) => setPassword(e.target.value)} value={password} required sx={{ marginBottom: "8px", width: "50%" }} variant="outlined" type="password" label="Password" />
-
+                        <TextField inputProps={{ pattern: "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,16}" }} onChange={(e) => setPassword(e.target.value)} value={password} required sx={{ marginBottom: "8px", width: "50%" }} variant="outlined" type="password" label="Password" />
+                        <Typography sx={{marginBottom:"8px",color:"red"}} variant="h8">Must contain at least one number, one uppercase and lowercase letter, a special character and at least 8 and max 16 characters</Typography>
 
                         <Button type="submit" variant="outlined" sx={{
                             color: "white", border: "none", bgcolor: "green", ":hover": {
