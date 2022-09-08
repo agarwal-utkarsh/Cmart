@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { getOrderDetails } from './API'
-import { Typography, Card, Grid, Box, CardContent, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material'
+import { Typography, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material'
 
 const OrderDetails = (props) => {
     
-    const [order, setOrder] = useState([])
-    const [amt, setAmt] = useState(0);
+    const [order, setOrder] = useState([]);
     let sum = 0;
     useEffect(() => {
         getOrderDetails(props.item.id)
@@ -20,7 +19,7 @@ const OrderDetails = (props) => {
 
 
     return (
-        <div>
+        <div style={{position:"relative"}}>
             <Typography variant="h5"> 👤 {props.item.customer}</Typography>
 
             <Table>
@@ -63,7 +62,7 @@ const OrderDetails = (props) => {
                     }
                 </TableBody>
             </Table>
-            <Typography sx={{display:"absolute", right:"10px"}} >Rs.{sum}</Typography>
+            <Typography sx={{position:"absolute", right:"25px",marginTop:"9px"}} >Rs.{sum}</Typography>
         </div>
     )
 }

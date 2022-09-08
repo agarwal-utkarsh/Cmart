@@ -1,4 +1,4 @@
-import { Typography, Button, CardActions, TextField, CardContent, Card, Box, Grid, Modal } from '@mui/material'
+import { Typography, Button, CardActions, CardContent, Card, Box, Grid, Modal, Table, TableHead, TableRow, TableCell, TableBody, Avatar } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { getOrders } from './API'
 import Navbar from './Navbar'
@@ -46,33 +46,38 @@ const GetOrders = () => {
                         return (
                             <Box key={ele.id} sx={{ marginTop: 5, display: "inline-block" }}>
                                 <Grid container spacing={1} >
-                                    <Card sx={{ width: 400, margin: 2.4, backgroundColor: "transparent" }}  >
-                                        <CardContent sx={{position:"relative"}}>
-                                            {/* <div>
-                                        <img src={ele.product.pictureUrl} style={{ height: "300px", widht: "300px" }}></img>
-                                    </div> */}
-                                            <Typography variant="h7" sx={{position:"absolute", right:"8px"}} >
+                                    <Card sx={{ width: 400, minHeight: 400, margin: 2.4, backgroundColor: "transparent" }}  >
+                                        <CardContent sx={{ position: "relative" }}>
+                                            <Typography variant="h7" sx={{ position: "absolute", right: "8px", fontWeight: "bold", fontFamily: "monospace", fontSize: "large" }} >
                                                 Order ID-{ele.id}
 
                                             </Typography>
                                             <Typography variant="h4" >
-                                                Order Details
-                                                {
-                                                    ele.orderDetails.map((detail) => {
-                                                        return (
-                                                            <div key={detail.id}>
-                                                                
-                                                                <Typography variant='h6' > {detail.product.name} Rs {detail.product.price} </Typography>
-                                                            </div>
-                                                        )
-                                                    })
-                                                }
+                                                {/* Order Details */}
+                                                <Table sx={{ marginTop: "2rem" }}>
+                                                    <TableHead>
+                                                        <TableRow>
+                                                            <TableCell>Image</TableCell>
+                                                            <TableCell>Product</TableCell>
+                                                            <TableCell>Price</TableCell>
+                                                        </TableRow>
+                                                    </TableHead>
+                                                    <TableBody>
+                                                        {
+                                                            ele.orderDetails.map((detail) => {
+                                                                return (
+                                                                    <TableRow key={detail.id}>
+                                                                        <TableCell><Avatar src={detail.product.pictureUrl} alt={detail.product.name} /></TableCell>
+                                                                        <TableCell>{detail.product.name}</TableCell>
+                                                                        <TableCell>{detail.product.price}</TableCell>
+                                                                    </TableRow>
+                                                                )
+                                                            })
+                                                        }
+                                                    </TableBody>
+                                                </Table>
                                             </Typography>
-                                            {/* {
-                                                ele.orderDetails.map((detail=>{
-                                                    console.log(detail.productId)
-                                                }))
-                                            } */}
+
                                             <div style={{ display: "flex", flexDirection: "column" }}>
 
                                                 <Typography variant="h7" >
@@ -81,9 +86,10 @@ const GetOrders = () => {
                                                 </Typography>
                                             </div>
                                         </CardContent>
-                                        <CardActions>
+
+                                        <CardActions sx={{ position: "relative" }}  >
                                             <Button variant="outlined" sx={{
-                                                border: "none", color: "white", bgcolor: "red", ":hover": {
+                                                border: "none", color: "white", position: "absolute", right: "16px", bgcolor: "red", ":hover": {
                                                     color: "white",
                                                     bgcolor: "#fc4242",
                                                     border: "none"
