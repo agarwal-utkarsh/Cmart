@@ -34,7 +34,7 @@ const AdminLogin = () => {
         loginAdmin(adminData)
             .then(response => {
                 localStorage.setItem("token", response.data.token);
-                console.log(response.data.token);
+                
                 setErrMsg('')
                 setLoading(false)
                 navigate('/admin-products')

@@ -30,11 +30,12 @@ const GetOrders = () => {
     useEffect(() => {
         getOrders()
             .then(response => {
-                console.log(response.data)
+                
                 setOrders(response.data)
             })
             .catch(error => {
-                console.log(error)
+                
+                alert(error)
             })
     }, [])
     return (

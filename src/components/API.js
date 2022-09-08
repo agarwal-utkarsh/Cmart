@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const url = "https://fakestoreapi.com";
+
 const URL="https://localhost:7150";
 
 export const getProducts=async ()=>{
@@ -9,16 +9,16 @@ export const getProducts=async ()=>{
 }
 
 export const addProduct=async (data)=>{
-    console.log(data);
+    
     const resp=await axios.post(`${URL}/controller`,data,{ headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`} })
 
     return resp
 }
 
 export const editProduct=async (data,id)=>{
-    console.log(data);
     
-    console.log(id);
+    
+    
     const resp = await axios.put(`${URL}/controller/${id}`,data,{ headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`} })
     return resp
 }
@@ -58,13 +58,13 @@ export const loginAdmin=async (adminData)=>{
 }
 
 export const addUser=async (userData)=>{
-    console.log(userData);
+    
     const resp=await axios.post(`${URL}/api/Auth/Register`,userData)
     return resp
 }
 
 export const addToCart =async (id,item)=>{
-    console.log(id)
+    
     const resp= await axios.post(`${URL}/api/Cart2/AddtoCart/${id}`,item, { headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`} })
     return resp
 }
@@ -91,7 +91,7 @@ export const editCart=async(data,cartId,productId,quantity)=>{
 }
 
 export const buyNow = async(details)=>{
-    console.log(details)
+    
     const resp=await axios.post(`${URL}/api/Order`,{details},{ headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`} })
     return resp
 }
@@ -102,7 +102,7 @@ export const getOrders=async()=>{
 }
 
 export const getOrderDetails=async(id)=>{
-    console.log(id)
+    
     const resp=await axios.get(`${URL}/api/Order/GetOrders/${id}`,{ headers: {"Authorization" : `Bearer ${localStorage.getItem("token")}`} })
     return resp
 }

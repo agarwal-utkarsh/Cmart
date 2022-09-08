@@ -79,7 +79,7 @@ const AdminShowProducts = () => {
 
       </TextField>
       <Box sx={{ marginTop: 5 }}>
-        <Grid container spacing={0.8} >
+        <Grid container spacing={0.8}  alignItems="center" justifyContent="center" display={'-ms-inline-flexbox'}>
           {filteredProducts.map((item) => (
             <Grid key={item.id} >
               <Card sx={{ width: 400, margin: 1.4, backgroundColor: "transparent" }}  >
